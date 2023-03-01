@@ -1,0 +1,52 @@
+.prof_con{
+    justify-content:center;
+    align-items:center;
+}
+
+.prof_con .profile-userpic {
+    position: relative;
+    width: 600px;
+    justify-content: center;
+    margin-left: -125px ;
+    border-radius: 50px;
+    /* margin-bottom: 100px; */
+}
+/*  if you want to modfiy the image */
+/* .prof_con .profile-userpic img{
+    border-radius: 30px;
+} */
+.profile-usertitle{
+    width: 100%;
+    font-size: 20px;
+    /* letter-spacing: 1.1px; */
+}
+
+@media (min-width: 768px) {
+    .django-ckeditor-widget{
+        width:80%;
+    }
+}
+.django-ckeditor-widget{
+    width:80%;
+    margin: 50px;
+}
+
+.form-group{
+    margin: 50px 0 ; 
+}
+
+.messages  {
+    margin-top: 100px;
+
+}
+
+.mod {
+    display: flex;
+    width: 80%;
+    padding: 2%;
+}
+.mod video{
+    width: 30%;
+
+}
+

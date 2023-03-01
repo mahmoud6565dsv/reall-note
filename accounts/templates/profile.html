@@ -1,0 +1,61 @@
+
+{% extends "base.html" %}
+{% load  static %}
+{% load bootstrap4 %}
+
+{% block body %}
+    <div class="section-headline text-center" style="padding-top: 100px;">
+        <h2>profile Details </h2>                 
+    </div>
+
+
+
+
+        <div class="container prof_con" >
+            <div class="row profile prof_con">
+                <div class="col-md-3 prof_con">
+                    <div class="profile-sidebar prof_con">
+                        <!-- SIDEBAR USERPIC -->
+                        <div class="profile-userpic" style="width:100%" >
+                            <img style="width:200px ; height:200px ; border-radius:50%;margin-left:150px" src=" {% if profile.userphoto  %} {{profile.userphoto.url}} {% else %} {% static 'assets/img/download.png'  %}   {% endif %}" class="img-responsive" alt=""  >
+                        </div>
+                        <hr>
+                        <!-- END SIDEBAR USERPIC -->
+                        <!-- SIDEBAR USER TITLE -->
+                        <div class="profile-usertitle">
+                            <div class="profile-usertitle-name">
+                                USerName : {{profile.user}}
+                            </div>
+                            <hr>
+                            <div class="profile-usertitle-job">
+                                Bio : {{profile.bio}}
+                            </div>
+                            <hr>
+                            <div class="profile-usertitle-job">
+                                Head Line : {{profile.headline}}
+                            </div>
+                            <hr>
+                            <div class="profile-usertitle-job">
+                                Date : {{profile.join_date}}
+                            </div>
+                            <hr>
+                        </div>
+                        <!-- END SIDEBAR USER TITLE -->
+                        <!-- SIDEBAR BUTTONS -->
+                        <div class="profile-userbuttons">
+                            <a href="{% url 'accounts:edit_profile' profile.slug %}" class="btn btn-success btn-sm" >Edit profile <a>
+                            <a href="{% url 'accounts:change_password' profile.slug %}" class="btn btn-success btn-sm" >Change Password <a>
+
+                        </div>
+
+                    </div>
+                </div>
+                {% comment %} <div class="col-md-9">
+                    {% comment %} <div class="profile-content">
+                        Some user related content goes here...
+                    </div> {% endcomment %}
+                </div> 
+            </div>
+        </div>
+
+{% endblock body %}

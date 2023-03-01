@@ -1,0 +1,19 @@
+
+{% comment %} {% extends "base.html" %} {% endcomment %}
+{% comment %} {% load  static %}
+{% load bootstrap4 %} {% endcomment %}
+
+
+<div class="delete-page" style="max-width:800px; margin:150px auto;background-color:#fafafa;padding: 0 ;border-radius:6px">
+    <div class="head-del" style="padding:20px;border-radius:6px;background-color:#ac0000;">
+        <h2  style="color:#fff">Delete Note </h2> 
+        <a  style="color:#fff" href="{% url 'notes:note_detail' note.slug %} "> Back</a>                
+    </div>
+
+    <form method="post"  style="padding:20px" >
+        {% csrf_token %}
+
+            <p style="color:#000;">Are you sure you want to delete "{{ note }}"?</p>
+            <input type="submit" value="Delete" style="color:#fff; background-color:#ac0000; outline:none ;border:none;border-radius:6px;padding:10px;cursor:pointer">
+    </form>
+</div>

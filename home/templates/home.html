@@ -1,0 +1,329 @@
+{% load  static %}
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Notes</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/try.jpg' %}" rel="icon">
+    <link href="{% static 'assets/img/try.jpg' %}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Raleway:300,400,400i,500,500i,700,800,900" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/mystyle.css' %}" rel="stylesheet">
+
+    <!-- =======================================================
+    * Template Name: eBusiness - v4.9.1
+    * Template URL: https://bootstrapmade.com/ebusiness-bootstrap-corporate-template/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex justify-content-between">
+
+      <div class="logo">
+        <h1><a href="/"><span>Quick</span>Notes</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+
+        <nav id="navbar" class="navbar">
+        
+        {% if  user.is_authenticated %}
+        <ul>
+            <li><a class="nav-link scrollto" href="{% url 'notes:all_notes' %}"> Your Notes</a></li>
+            <li><a class="nav-link scrollto" href="{% url 'notes:note_add' %}"> Add Notes</a></li>
+            <li><a class="nav-link scrollto" href="{% url 'accounts:profile' profile.slug %}">Profile</a></li>
+            <li><a class="nav-link scrollto" href="{% url 'accounts:logout' %}">Logout</a></li>
+        </ul>
+        {% else %}
+        <ul>
+            <li><a class="nav-link scrollto" href="{% url 'accounts:login' %}">Login</a></li>
+
+            <li><a class="nav-link scrollto" href="{% url 'accounts:register' %}">Signup</a></li>
+            </ul>
+        {% endif %}
+        <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+
+    </div>
+</header><!-- End Header -->
+
+  <!-- ======= hero Section ======= -->
+  <section id="hero">
+    <div class="hero-container">
+      <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+
+        <ol id="hero-carousel-indicators" class="carousel-indicators"></ol>
+
+        <div class="carousel-inner" role="listbox">
+
+            <div class="carousel-item active"    style="background-image: url({% static 'assets/img/hero-carousel/12.jpg' %}) " >
+                <div class="carousel-container">
+                    <div class="container">
+                        <h2 class="animate__animated animate__fadeInDown">Create Awesome Notes .. Every Where </h2>
+                        <p class="animate__animated animate__fadeInUp">We're In The QuickNotes Of Helping You to study</p>
+                        <a href="{% if user.is_authenticated %} {% url 'notes:note_add' %} {% else %} {% url 'accounts:login' %} {% endif %}" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
+                    </div>
+                </div>
+            </div>
+
+          <div class="carousel-item" style="background-image: url({% static 'assets/img/hero-carousel/11.jpg' %})">
+            <div class="carousel-container">
+              <div class="container">
+                <h2 class="animate__animated animate__fadeInDown">Create Awesome Notes .. Every Where </h2>
+                <p class="animate__animated animate__fadeInUp">Create , Update and Share your notes with others</p>
+                <a href="{% if user.is_authenticated %} {% url 'notes:note_add' %} {% else %} {% url 'accounts:login' %} {% endif %}" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item" style="background-image: url({% static 'assets/img/hero-carousel/13.jpg' %})">
+            <div class="carousel-container">
+              <div class="container">
+                <h2 class="animate__animated animate__fadeInDown">Create Awesome Notes .. Every Where</h2>
+                <p class="animate__animated animate__fadeInUp">Create an account to share your notes with your frindes and update your note details</p>
+                <a href="{% if user.is_authenticated %} {% url 'notes:note_add' %} {% else %} {% url 'accounts:login' %} {% endif %}" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+        </a>
+
+        <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+          <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+        </a>
+
+      </div>
+    </div>
+  </section><!-- End Hero Section -->
+
+  <main id="main">
+    <!-- ======= Blog Section ======= -->
+    <div id="blog" class="blog-area">
+      <div class="blog-inner area-padding">
+        <div class="blog-overly"></div>
+        <div class="container ">
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="section-headline text-center">
+                {% if user.is_authenticated %}
+                <h2>Our Resent Notes </h2>
+                {% else %}
+                <h2>You Must Login To Make Notes </h2>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            {% if user.is_authenticated %}
+              {% for note in all_notes %}
+                {% if note.active %}
+                  <!-- Start Left Blog -->
+                  <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="single-blog">
+                        <div class="single-blog-img">
+                        <a >
+                            {% if note.img %}
+                            <img src="{{note.img.url}}" alt="">
+                            {% endif %}
+                        </a>
+                        </div>
+                        <div class="blog-meta">
+
+                        <span class="date-type">
+                            <i class="fa fa-calendar"></i>{{note.crated}}
+                        </span>
+                        </div>
+                        <div class="blog-text">
+                        <h4>
+                            <a >{{note.title}}</a>
+                        </h4>
+                        <h6>
+                            
+                            {{note.content|safe|truncatewords:'20'}}
+                        </h6>
+                        </div>
+
+                        <span>
+                        <a href="{% if user.is_authenticated %} {% url 'notes:note_detail' note.slug %}  {% else %} {% url 'accounts:login' %} {% endif %}" class="ready-btn">Read more</a>
+                        </span>
+                        <p class="date-type" style='margin:10px;' >
+                            userName :  {{note.user.username}}
+                        </p>
+
+                    </div>
+                  
+                  </div>
+                  <!-- End Left Blog-->
+                {% endif %}
+              {% endfor %}
+            {% else %}
+            
+              <div class="col-md-12 col-sm-4 col-xs-12 ">
+                
+                  <div class="single-blog">
+                      <div class="single-blog-img">
+                      <a >
+                          <img src="{% static 'assets/img/office-gbab7ad6ff_1920.jpg' %}" alt="">
+                      </a>
+                      </div>
+                      <div class="blog-meta">
+                      </div>
+                      <div class="blog-text">
+                      <h4>
+                          <a >Login Now !</a>
+                      </h4>
+                      <h6>
+                          {% lorem 2 b  %}
+                      </h6>
+                      </div>
+                      <button class="btn btn-primary">Show</button>
+                  </div>
+                  <div class="single-blog mt-5">
+                    <div class="single-blog-img">
+                    <a >
+                        
+                        <img src="{% static 'assets/img/startup-g34d35e916_1920.jpg' %}" alt="">
+                        
+                    </a>
+                    </div>
+                    <div class="blog-meta">
+
+                    </div>
+                    <div class="blog-text">
+                    <h4>
+                        <a >Login Now !</a>
+                    </h4>
+                    <h6>
+                        
+                        {% lorem 2 b  %}
+                    </h6>
+                    </div>
+                    <button class="btn btn-primary">Show</button>
+                  </div>
+              </div>
+            {% endif %}
+
+        </div>
+  </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer>
+        <div class="footer-area">
+        <div class="container">
+            <div class="row">
+            <div class="col-md-4">
+                <div class="footer-content">
+                <div class="footer-head">
+                    <div class="footer-logo">
+                        <h2><span>Quick</span>Notes</h2>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+                    <div class="footer-icons">
+                        <ul>
+                            <li>
+                            <a href="#"><i class="bi bi-facebook"></i></a>
+                            </li>
+                            <li>
+                            <a href="#"><i class="bi bi-twitter"></i></a>
+                            </li>
+                            <li>
+                            <a href="#"><i class="bi bi-instagram"></i></a>
+                            </li>
+                            <li>
+                            <a href="#"><i class="bi bi-linkedin"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <!-- end single footer -->
+            <div class="col-md-4">
+                <div class="footer-content">
+                <div class="footer-head">
+                    <h4>information</h4>
+                    <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+                    </p>
+                    <div class="footer-contacts">
+                    <p><span>Tel:</span> +123 456 789</p>
+                    <p><span>Email:</span> contact@example.com</p>
+                    <p><span>Working Hours:</span> 9am-5pm</p>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <!-- end single footer -->
+
+            </div>
+        </div>
+        </div>
+        <div class="footer-area-bottom">
+        <div class="container">
+            <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="copyright text-center">
+                <p>
+                    &copy; Copyright <strong>QuickNotes</strong>. All Rights Reserved
+                </p>
+                </div>
+                <div class="credits">
+                <!--
+                All the links in the footer should remain intact.
+                You can delete the links only if you purchased the pro version.
+                Licensing information: https://bootstrapmade.com/license/
+                Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=eBusiness
+                -->
+                Designed by <a>Mahmoud Adel</a>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </footer><!-- End  Footer -->
+
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>

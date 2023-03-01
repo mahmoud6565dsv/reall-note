@@ -1,0 +1,38 @@
+
+{% extends "base.html" %}
+{% load  static %}
+{% load bootstrap4 %}
+
+{% block body %}
+    <div class="section-headline text-center" style="padding-top: 100px;">
+        <h2>Leave Comment </h2>                 
+    </div>
+    <form method="POST" class="mt-5" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ comment_form.media }}
+        {% bootstrap_form comment_form %}
+                        
+        {% buttons %}
+            <button type="submit" class="btn btn-primary" style="margin:50px 0 ;">
+                Leave Comment
+            </button>
+        {% endbuttons %}
+        <p>You have {{count}} comment{{count|pluralize:"s"}}</p>
+        {% for comment in all_comments %}
+        
+            <div class="profile-userpic" style="width:100% ; display:flex" >
+                <p style="width:50px ; height:50px ; border-radius:5%; background-color:#eee"> </p>
+                <p style="margin-left:10px;margin-top:20px"><span class="fw-bold ">{{ comment.user}}</span> : {{comment.created}}</p>
+                {% comment %} <p style="color:red; cursor:pointer " class='ms-5 mt-4 '><i class="fa-solid fa-trash me-2 "></i></p> {% endcomment %}
+                {% comment %} <a style="color:red; cursor:pointer " href="{% url 'notes:delete_comment' comment.id %}" class="ready-btn ms-5 mt-4 "><i class="fa-solid fa-trash me-2 "></i></a> {% endcomment %}
+            </div>
+            <p  style="margin-left:70px;opacity:0.6;width:100% ;">- {{ comment.comment}}</p>
+            <hr>
+    
+    
+        {% endfor %} 
+    </form>
+ 
+
+
+{% endblock body %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load  static %}
+
+{% load bootstrap4 %}
+
+{% block body %}
+<div class="section-headline text-center" style="padding-top: 100px;">
+  <h2>Register Form </h2>                 
+</div>
+<form class="form-horizontal"  method="POST">
+  {% csrf_token %}
+  <fieldset>
+    <div id="legend">
+      <legend class="">Register</legend>
+    </div>
+
+    {% bootstrap_form form %}
+    <div class="control-group">
+      <!-- Button -->
+      <div class="controls">
+        <button class="btn btn-success">Register</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+{% endblock body %}

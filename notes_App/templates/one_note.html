@@ -1,0 +1,63 @@
+
+{% extends "base.html" %}
+{% load  static %}
+{% load bootstrap4 %}
+
+
+{% block body %}
+
+<div class="section-headline text-center" style="padding-top: 100px;">
+    <h2>Note Details </h2>                 
+</div>
+                <!-- Start Left Blog -->
+                <div class="col-md-20 col-sm-20 col-xs-25" style="margin-top: 50px;">
+                <div class="single-blog">
+                    <div class="single-blog-img">
+                    
+                        {% if note.img %}
+                            <img src="{{note.img.url}}" alt="">
+                        {% endif %}
+                    
+                    </div>
+                    <div class="blog-meta">
+                    <span class="date-type">
+                        <i class="fa fa-calendar"></i>{{note.crated}}
+                    </span>
+                    </div>
+                    <div class="blog-text">
+                    <h1>
+                        <a>{{note.title}}</a>
+                    </h1>
+                    <p style="font-size:24px;font-weight:300;font-family:times;">
+                        {{note.content|safe}}
+                    </p>
+                    <p class="date-type">
+                        
+                        Active : {{note.active}}
+                        
+                    </p>
+                    <p class="date-type">
+                        tages : {{note.tags}}
+                    </p>
+                    <p class="date-type">
+                        UserName : {{note.user.username}}
+                    </p>
+                    </div>
+                    <p>{{count}} comment{{count|pluralize:"s"}}</p>
+                    {% if user == note.user %}
+                        <span>
+                            <a href="{% url 'notes:note_edit' note.slug %}" class="ready-btn">Update Details</a>
+                        </span>
+                        <span>
+                            <a href="{% url 'notes:delete_note' note.slug %}" class="ready-btn">Delete</a>
+                        </span> 
+
+                        
+                    {% endif %}
+                    <a class="ready-btn" href="{% url 'notes:add_Comment' note.slug %}"> Comments</a>
+
+                </div>
+                </div>
+
+
+{% endblock body %}

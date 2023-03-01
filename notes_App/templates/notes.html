@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load  static %}
+
+
+{% block body %}
+    <div class="section-headline text-center" style="padding-top: 100px;">
+        <h2> All Notes </h2>                 
+    </div>
+    {% comment %} <a style="background-color:#222;color:#fff;font-size:16px;padding:10px;border-radius:6px;margin-bottom:50px" href="/"> Home</a> {% endcomment %}
+        {% if all_notes %}
+                {% for note in all_notes %}
+                <!-- Start Left Blog -->
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="single-blog">
+                    <div class="single-blog-img">
+                    <a >
+                        {% if note.img %}
+                        <img src="{{note.img.url}}" alt="">
+                        {% endif %}
+                    </a>
+                    </div>
+                    <div class="blog-meta">
+
+                    <span class="date-type">
+                        <i class="fa fa-calendar"></i>{{note.crated}}
+                    </span>
+                    </div>
+                    <div class="blog-text">
+                    <h4>
+                        <a >{{note.title}}</a>
+                    </h4>
+                    <h6>
+                        
+                        {{note.content|safe|truncatewords:'20'}}
+                    </h6>
+                    </div>
+                    <span>
+                    <a href="{% url 'notes:note_detail' note.slug %} " class="ready-btn">Read more</a>
+                    </span>
+                    <p class="date-type" style='margin:10px;' >
+                        userName :  {{note.user.username}}
+                    </p>
+
+                </div>
+                <!-- Start single blog -->
+                </div>
+                <!-- End Left Blog-->
+                {% endfor %}
+        {% else %}
+        <p style="width:600px ; margin:auto;padding-left:200px"  >You Don't Have Any Notes Yet!</p>
+        {% endif %}
+
+{% endblock body %}
